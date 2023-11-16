@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import requests                                    #@
 from pspy import D                                 #@
 from random import choice                          #@
@@ -19,12 +16,6 @@ class MainApp(MDApp):
 		self.title = "My Pass Create"
 		self.theme_cls.theme_style = "Dark"
 		self.theme_cls.primary_palette = "Orange"
-
-		if True:
-			Window.top = 20
-			Window.left = 1300
-			Window.size = (300,580)
-		
 		return MainWindow() 
 
 class MainWindow(BoxLayout):
@@ -70,7 +61,6 @@ class MainWindow(BoxLayout):
 		
 		self.risultato.text = final
 
-if __name__ == "__main__":
-	MainApp().run()
+MainApp().run()
 
 
