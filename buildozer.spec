@@ -90,9 +90,9 @@ fullscreen = 1
 # (int) Android API to use android.api = 31
 
 # (int) Minimum API required
-android.minapi = 21
-android.jit = False
-android.packed = False
+#android.minapi = 21
+#android.jit = False
+#android.packed = False
 
 # (int) Android SDK version to use
 #android.sdk = 20
