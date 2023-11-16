@@ -1,0 +1,319 @@
+#:import hex kivy.utils.get_color_from_hex
+#:import Clipboard kivy.core.clipboard.Clipboard
+#:import Snackbar kivymd.uix.snackbar.Snackbar
+#Snackbar(text="Salvato!",snackbar_x="50dp",snackbar_y="10dp",size_hint_x=.7).open()
+
+<MainWindow>:
+	# gli id
+	teip: teip
+	searchdt: searchdt
+	risultato: risultato
+	richiesta: richiesta
+
+	#Base
+	BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgba: hex("#E4D191")
+	
+			Rectangle:
+				size: self.size #, self.size[1]
+				pos: self.pos
+
+		#titolo
+		BoxLayout:
+			canvas:
+				Color:
+					rgba: hex("#000000")
+	
+				RoundedRectangle:
+					size: self.size
+					pos: self.pos	
+					radius: [0,0,24,24]
+			
+			size_hint_y: 0.10
+			
+			#immagine
+			BoxLayout:
+				padding: 6			
+				Image:
+					source: "py.png"
+					allow_stretch: 
+					size: self.texture_size
+			Label:
+				
+			Label:
+				text: "Python App Fer-Ati"	
+				halign: "center"
+			
+			Label:
+		
+		#Barra Menu
+		MDBottomNavigation:
+			padding: 6
+			panel_color: hex("#000000")
+			selected_color_background: "orange"
+			text_color_active: "lightgrey"
+			radius: [30]
+
+		
+			#!scherm
+			MDBottomNavigationItem:
+				name: 'screen 1'
+				text: 'Map'
+				icon: 'map.png'
+				
+				#1Base
+				BoxLayout:
+					padding: 5
+					orientation: 'vertical'
+					canvas:
+						Color:
+							rgba: hex("#E4D191")
+							
+				
+						Rectangle:
+							size: self.size[0], self.size[1]
+							pos: self.pos
+				
+					Label:
+						size_hint_y: 0.01
+
+					#Box Dati
+					BoxLayout:
+						orientation: 'vertical'
+						canvas:
+							Color:
+								rgba: hex("#000000")
+				
+							RoundedRectangle:
+								size: self.size
+								pos: self.pos	
+								radius: [24]
+						
+						pos_hint: {"center_x": .5, "center_y": .5}
+						
+						BoxLayout:
+							padding: 18
+							MapView: 
+								zoom: 12  # Imposta il livello di zoom iniziale
+								lat: 40.8522  # Latitudine approssimativa di Napoli
+								lon: 14.2681  # Longitudine approssimativa di Napoli
+								map_source: "osm" 
+								# Altre impostazioni di stile o attributi desiderati
+								border_color: [1, 1, 1, 1]
+								#border_color: [1, 1, 1, 1]  # Imposta il colore del bordo della mappa
+								border_width: 2  # Imposta la larghezza del bordo della mappa
+								bgcolor: [0, 0, 0, 1] 
+
+			MDBottomNavigationItem:
+				name: 'Request'
+				text: 'Request'
+				icon: 'ai.png'
+
+				#2Base
+				BoxLayout:
+					padding: 5
+					orientation: 'vertical'
+					canvas:
+						Color:
+							rgba: hex("#E4D191")
+				
+						Rectangle:
+							size: self.size[0], self.size[1]
+							pos: self.pos
+
+					Label:
+						size_hint_y: 0.01
+
+					#Box Dati
+					BoxLayout:
+						orientation: 'vertical'
+						canvas:
+							Color:
+								rgba: hex("#000000")
+				
+							RoundedRectangle:
+								size: self.size
+								pos: self.pos	
+								radius: [24]
+						
+						pos_hint: {"center_x": .5, "center_y": .5}
+						
+						#########################################
+						BoxLayout:
+							padding: 20
+							orientation: 'vertical'
+
+							MDTextField:
+								id: searchdt
+								hint_text: "Search"
+								pos_hint: {"center_x": .5, "center_y": .5}
+								#size_hint_x: .
+							
+							Label:
+								size_hint_y: 0.02
+							ScrollView:
+								MDLabel:
+									id: richiesta
+									text: "Request Search!"
+									size_hint_y: None
+									height: self.texture_size[1]
+									text_size: self.width, None
+							
+							Label:
+								size_hint_y:0.05
+							MDRoundFlatButton:
+								text: "run"
+								text_color: hex("#FFA500")
+								pos_hint: {"center_x": .5, "center_y": .5}
+								size_hint: (.35,.10)
+								on_press:
+									root.search()
+
+			MDBottomNavigationItem:
+				name: 'Password'
+				text: 'Password'
+				icon: 'pass.png'
+
+				#3Base
+				BoxLayout:
+					padding: 5
+					orientation: 'vertical'
+					canvas:
+						Color:
+							rgba: hex("#E4D191")
+				
+						Rectangle:
+							size: self.size[0], self.size[1]
+							pos: self.pos
+
+					Label:
+						size_hint_y: 0.01
+
+
+					#Box Dati
+					BoxLayout:
+						orientation: 'vertical'
+						canvas:
+							Color:
+								rgba: hex("#000000")
+				
+							RoundedRectangle:
+								size: self.size
+								pos: self.pos	
+								radius: [24]
+						
+						pos_hint: {"center_x": .5, "center_y": .5}
+
+						#base pass
+						BoxLayout:
+							orientation: 'vertical'
+							
+							MDTextField:
+								id: teip
+								hint_text: ""
+								pos_hint: {"center_x": .5, "center_y": .5}
+								size_hint_x: .85
+							
+							Label:
+							
+							MDLabel:
+								id: risultato
+								text: ""
+								color: hex("#FFA500")
+								allow_selection: True
+								allow_copy: True	
+								halign: "center"
+								padding: "26dp", "26dp"
+									
+							Label:
+							
+							#Bottoni
+							BoxLayout:
+								
+								Label:
+								MDRoundFlatButton:
+									text: "Random"
+									text_color: hex("#FFA500")
+									pos_hint: {"center_x": .5, "center_y": .5}
+									size_hint: (.80,.20)
+									on_press:
+										root.random_pass()
+
+								MDRoundFlatButton:
+									text: "run"
+									text_color: hex("#FFA500")
+									pos_hint: {"center_x": .5, "center_y": .5}
+									size_hint: (.80,.20)
+									on_press:
+										root.slak()
+
+								
+								MDRoundFlatButton:
+									text: 'Copy'
+									text_color: hex("#FFA500")
+									pos_hint: {"center_x": .5, "center_y": .5}
+									size_hint: (.80,.20)
+									on_release:
+										Clipboard.copy(risultato.text)
+								Label:
+
+			
+			MDBottomNavigationItem:
+				name: 'P'
+				text: '+-x/ '
+				icon: 'code.png'
+
+				#3Base
+				BoxLayout:
+					padding: 5
+					orientation: 'vertical'
+					canvas:
+						Color:
+							rgba: hex("#E4D191")
+				
+						Rectangle:
+							size: self.size#[0], self.size[1]
+							pos: self.pos
+
+					Label:
+						size_hint_y: 0.01
+
+					#Box Dati
+					BoxLayout:
+						orientation: 'vertical'
+						canvas:
+							Color:
+								rgba: hex("#000000")
+				
+							RoundedRectangle:
+								size: self.size
+								pos: self.pos	
+								radius: [24]
+						
+						pos_hint: {"center_x": .5, "center_y": .5}
+
+						BoxLayout:
+							padding: 13
+							
+							CodeInput:
+								font_size: '13sp'
+								id: code_input
+							    text: "import os\n\nx = 0\n\ndef function():\n\tprint('Hello, World!')\n\n\twhile True:\n\t\tx+=1\n\n\t\tprint(x)"
+								style_name: 'monokai'  
+								background_color: 0, 0, 0, 1  
+								cursor_color: 1, 1, 1, 1  
+								cursor_blink: True  
+								multiline: True  
+								use_bubble: True  
+								background_normal: ''
+								background_active: ''
+								border: 5, 5, 5, 5
+								border_radius: [10, 10, 10, 10]  
+								on_focus:
+									if self.focus: self.border = [0, 0, 0, 0]
+									else: self.border = [5, 5, 5, 5]
+						
+
