@@ -9,6 +9,8 @@ from kivy.properties import ObjectProperty         #@
 from kivy.uix.scrollview import ScrollView         #@
 from kivy_garden.mapview import MapView, MapSource #@
 
+kivy.require('1.9.0')
+
 class MainApp(MDApp):
 	
 	def build(self):
