@@ -36,7 +36,7 @@ version = 3.4.6
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.2.1,kivymd,kivy_garden
+requirements = python3==3.7.6,hostpython3==3.7.6, kivy,kivymd, pillow
 #, android,requests,random,pillow
 #kivy_garden, android
 
